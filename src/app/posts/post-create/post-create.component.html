@@ -1,0 +1,46 @@
+<main>
+  <h4 matLine>Add Erosion Post</h4>
+    <mat-card>
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <form [formGroup]="postForm" *ngIf="!isLoading" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <input [formControlName]="'title'" matInput placeholder="Erosion Title" type="text">
+      </mat-form-field>
+      <mat-form-field>
+        <input [formControlName]="'address'" matInput placeholder="Site Address" type="text">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea [formControlName]="'body'" matInput placeholder="More information"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Erosion Status</mat-label>
+        <select [formControlName]="'status'" matNativeControl>
+          <option value="0">Open</option>
+          <option value="1">Closed</option>
+        </select>
+      </mat-form-field>
+
+      <div class="form-group" *ngIf="postForm.get('status').value === '0'">
+          <label for="progress">Progress: </label>
+          <mat-slider
+            [formControlName] = "'progress'"
+            thumbLabel
+            [displayWith]="formatLabel"
+            tickInterval="5"
+            min="0"
+            max="100">
+        </mat-slider>
+      </div>
+
+
+
+      <mat-form-field *ngIf="postForm.get('status').value === '0'">
+        <textarea [formControlName]="'problem'" matInput placeholder="Problem Associated"></textarea>
+      </mat-form-field>
+
+      <button class="mr-2" mat-raised-button color="primary">Submit</button>
+      <button type="button" mat-raised-button color="warn">Reset</button>
+    </form>
+    </mat-card>
+
+</main>

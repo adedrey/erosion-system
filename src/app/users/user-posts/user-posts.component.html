@@ -1,0 +1,38 @@
+<main>
+  <div>
+
+    <router-outlet></router-outlet>
+  </div>
+  <hr>
+  <div>
+      <h5>All Site Posts</h5>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <table mat-table *ngIf="!isLoading" [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let post">{{ post.title }}</td>
+      </ng-container>
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef>Address</th>
+        <td mat-cell *matCellDef="let post">{{ post.address }}</td>
+      </ng-container>
+      <ng-container matColumnDef="progress">
+        <th mat-header-cell *matHeaderCellDef>Progress</th>
+        <td mat-cell *matCellDef="let post">{{ post.progress }} %</td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>Action</th>
+        <td class="text-center" mat-cell *matCellDef="let post">
+          <a mat-button color="primary" [routerLink]="['/users', 'post', post._id]">Read more...</a>
+        </td>
+      </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <br>
+</main>

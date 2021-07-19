@@ -1,0 +1,45 @@
+<main>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+  <div>
+    <hr>
+    <h4>All Applications</h4>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <table mat-table *ngIf="!isLoading" [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let post"><a [routerLink] = "['/admin', 'post', post._id]" >{{ post.title }}</a></td>
+      </ng-container>
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef>Address</th>
+        <td mat-cell *matCellDef="let post">{{ post.address }}</td>
+      </ng-container>
+      <ng-container matColumnDef="progress">
+        <th mat-header-cell *matHeaderCellDef>Progress</th>
+        <td mat-cell *matCellDef="let post">{{ post.progress }} %</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>Status</th>
+        <td class="text-center" mat-cell *matCellDef="let post">
+          <button mat-button *ngIf = "!post.assign"><mat-icon>visibility_off</mat-icon></button>
+          <a mat-button color="primary" *ngIf = "post.assign"
+            [routerLink]="['/admin', 'contracts', post._id, 'view-applicants']"><mat-icon>visibility</mat-icon></a>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>Action</th>
+        <td class="text-center" mat-cell *matCellDef="let post">
+          <a mat-button color="primary"
+            [routerLink]="['/admin', 'contracts', post._id, 'view-applicants']">Applicants</a>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</main>

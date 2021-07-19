@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Apply Now!</h1>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<form [formGroup]="approvalForm" *ngIf="!isLoading" (ngSubmit)="onSubmit()">
+  <div mat-dialog-content>
+    <div>
+      <p class="text-justify">Please note that your document should contain all the necessary information needed and also
+        include your budget for this project</p>
+    </div>
+    <div>
+      <button mat-stroked-button color="basic" type="button" (click)="filePicker.click()">Pick a Document</button>
+      <input type="file" #filePicker (change)="onImagePicked($event)">
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button type="button" (click)="onNoClick()">Cancel</button>
+    <button mat-button type="submit"
+
+    [mat-dialog-close]>Ok</button>
+  </div>
+</form>
+
+<!-- [disabled]='!approvalForm.valid' -->

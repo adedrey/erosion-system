@@ -1,0 +1,43 @@
+<main>
+
+  <div>
+
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <table *ngIf="!isLoading" mat-table [dataSource]="dataSource"  class="mat-elevation-z8">
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let post">{{ post.title }}</td>
+      </ng-container>
+      <ng-container matColumnDef="address">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>Address</th>
+        <td class="text-center" mat-cell *matCellDef="let post">{{ post.address }}</td>
+      </ng-container>
+      <ng-container matColumnDef="progress">
+        <th mat-header-cell *matHeaderCellDef>Progress</th>
+        <td mat-cell *matCellDef="let post">{{ post.progress }} %</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let post">{{ post.status === "0" ? 'Open' : 'Closed' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>Action</th>
+        <td class="text-center" mat-cell *matCellDef="let post">
+          <a mat-button color="primary" [routerLink]="['/admin', 'post', post._id]">MORE</a>
+          <a mat-button color="accent" [routerLink]="['/admin', 'post', post._id, 'edit']">EDIT</a>
+          <button mat-button color="warn" (click)="onDelete(post._id)">DELETE</button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </div>
+
+
+
+</main>

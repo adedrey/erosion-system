@@ -1,0 +1,27 @@
+<main>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <mat-card>
+        <form [formGroup]="signupForm" *ngIf="!isLoading" (ngSubmit)="onSubmit()">
+      <h4 matLine>Sign Up</h4>
+      <mat-form-field>
+        <input [formControlName]="'name'" matInput placeholder="Company Name" type="text">
+      </mat-form-field>
+      <mat-form-field>
+        <input [formControlName]="'address'" matInput placeholder="Company Address" type="text">
+      </mat-form-field>
+      <mat-form-field>
+        <input [formControlName]="'email'" matInput placeholder="Company Email Address" type="text">
+      </mat-form-field>
+      <mat-form-field>
+        <input [formControlName]="'password'" type="password" matInput placeholder="Your Password">
+      </mat-form-field>
+      <mat-form-field>
+        <span matPrefix>NIG &nbsp;</span>
+        <input type="tel" matInput [formControlName]="'phone_no'" placeholder="Telephone">
+        <mat-icon matSuffix>mode_edit</mat-icon>
+      </mat-form-field>
+      <button class="mr-2" [disabled] = "!signupForm.valid" mat-raised-button color="primary">Register</button>
+      <button type="button" mat-raised-button color="warn">Reset</button>
+    </form>
+    </mat-card>
+</main>

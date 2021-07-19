@@ -1,0 +1,28 @@
+<section id="info" class="py-3">
+  <div class="container">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <div class="row" *ngIf="post && !isLoading">
+      <div class="col-md-12 align-self-center">
+        <button mat-raised-button color="accent" (click)="openDialog()">Apply Now!</button>
+        <h3>{{ post.title }}</h3>
+        <div class="align-self-center">
+          <img
+            src="https://www.nps.gov/subjects/camping/images/recipe_1.jpg?maxwidth=1200&maxheight=1200&autorotate=false"
+            alt="" class="img-fluid">
+
+        </div>
+        <p class="blockquote text-justify">{{ post.body }}</p>
+        <h5 class="text-truncate">Status : <span>{{ post.status === '0' ? 'Open' : 'Closed' }}</span></h5>
+        <h5 class="text-truncate">Progress : <span>{{ post.progress }} %</span></h5>
+
+        <h5 *ngIf="!post.problem == ''">Problem</h5>
+        <p *ngIf="!post.problem == ''" class="blockquote text-justify">{{ post.problem }}</p>
+      </div>
+    </div>
+    <div class="row" *ngIf="!post && !isLoading">
+      <div class="col-md-12 align-self-center">
+        <h3>Nothing to show</h3>
+      </div>
+    </div>
+  </div>
+</section>
